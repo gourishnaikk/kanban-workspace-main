@@ -1,0 +1,21 @@
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: crewboard-backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    build:
+      context: .
+    container_name: crewboard-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
